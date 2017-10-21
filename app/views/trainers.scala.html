@@ -1,0 +1,19 @@
+@import scala.collection.immutable.ListSet
+@(A:Map[String,ListSet[String]])
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Trainers</title>
+</head>
+<body>
+    <ul>
+        @for(k<-A.keys){
+            <li>@k- @for(s<-A(k)){
+                    <b> @s </b>
+                }
+
+            </li>
+        }
+    </ul>
+</body>
+</html>

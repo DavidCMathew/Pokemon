@@ -11,7 +11,11 @@ libraryDependencies ++= Seq(
   cache,
   ws,
   specs2 % Test
+
 )
+libraryDependencies += "mysql" % "mysql-connector-java" % "5.1.41"
+
+
 
 resolvers += "scalaz-bintray" at "http://dl.bintray.com/scalaz/releases"
 

@@ -1,4 +1,22 @@
-@()
+@import scala.collection.immutable.ListSet
+@import models.Poke
+@(poke:ListSet[Poke])
 <html>
-hi
+    <head>
+        <title>Pokemon</title>
+    </head>
+    <body>
+        <ul>
+            @for(p<-poke){
+            <li>
+                <b>@{p.id}</b>
+                <b>@{p.name}</b>
+                <b>@{p.type1}</b>
+                <b>@{p.type2}</b>
+                <b>@{p.ability}</b>
+                <b>@{if(p.evolvesFrom!=0) p.evolvesFrom else "-"}</b>
+            </li>
+            }
+        </ul>
+    </body>
 </html>
