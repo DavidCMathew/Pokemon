@@ -1,9 +1,74 @@
 @()
 <html>
-<head>
-    <title>Home</title>
-</head>
-<body>
-        HOME PAGE
-</body>
+    <head>
+            <title>Home</title>
+            <link rel="stylesheet" type="text/css" href=@(routes.Assets.at("stylesheets/semantic.css"))>
+    </head>
+
+    <body class="pushable">
+        <div class="pusher">
+            <div class="ui inverted vertical masthead center aligned segment">
+                <div class="ui text container">
+                    <img class="ui centered image" src=@(routes.Assets.at("images/logo.png"))>
+                </div>
+            </div>
+
+            <div class="ui vertical stripe segment">
+                <div class="ui middle aligned stackable grid container">
+                    <div class="row">
+                        <div class="eight wide column">
+                            <h3 class="ui header">What is a Pokémon?</h3>
+                            <p>The name Pokémon is the romanized contraction of the Japanese brand Pocket Monsters.
+                                The term Pokémon collectively refers to the numerous fictional species that have made appearances in Pokémon media</p>
+                            <h3 class="ui header">What are the characteristics of a Pokémon?</h3>
+                            <p>Every Pokémon is defined by a unique name. Each Pokémon can be of a type such as Fire, Water, Grass
+                            etc. and some may have 2 types. Each type has its own weaknesses and strengths, this helps in deciding which
+                            Pokémon could be stronger than the other. Each pokemon also has an ability which can give it an edge. Some Pokémon
+                            can evolve into stronger forms</p>
+                            <h3 class="ui header">Who is a Trainer?</h3>
+                            <p>A trainer is one who befriends Pokémon by capturing them. A trainer can have a team of upto 6 Pokémon.</p>
+                        </div>
+                        <div class="six wide right floated column">
+                            <img src=@(routes.Assets.at(s"images/Red.png")) class="ui medium borderless rounded image">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ui vertical stripe quote segment">
+                <div class="ui equal width stackable internally celled grid">
+                    <div class="center aligned row">
+                        <div class="column">
+                            <h3>Want to see more?</h3>
+                            <div class="ui big red button" onclick="window.location='/index'">The Pokémon</div>
+                        </div>
+                        <div class="column">
+                            <h3>The Abilities</h3>
+                            <div class="ui big blue button" onclick="window.location='/abilities'">Take a look</div>
+                        </div>
+                    </div>
+                    <div class="center aligned row">
+                        <div class="column">
+                            <h3>Trainers</h3>
+                            <div class="ui big teal button" onclick="window.location='/trainers'">Check out their teams</div>
+                        </div>
+                        <div class="column">
+                            <h3>Find a Pokémon</h3>
+                            <div class="ui big olive button" onclick="window.location='/search'">Search the Database</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ui inverted vertical footer segment">
+                <div class="ui container">
+                    <div class="ui inverted header">
+                        Site Master: David<br>
+                        Contact : 9964132847<br>
+                        Email: davidsemailid@@gmail.com
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
 </html>

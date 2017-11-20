@@ -9,3 +9,4 @@ class Poke(n:String,i:Int,t1:String,t2:String,ab:String,ef:Int) {
   val evolvesFrom:Int=ef
 
 }
+

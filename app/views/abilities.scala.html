@@ -1,15 +1,62 @@
 @import scala.collection.immutable.ListSet
-@(A:Map[String,String])
+@(A:Map[String,String],s:String="")
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Abilities</title>
-</head>
-<body>
-<ul>
-    @for(k<-A.keys){
-    <li>@k <b> @A(k) </b></li>
-    }
-</ul>
-</body>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" type="text/css" href=@(routes.Assets.at("stylesheets/semantic.css"))>
+        <title>Abilities</title>
+    </head>
+
+    <body onload="window.location.hash = '#@{s.toLowerCase}';">
+
+        <div class="main ui center aligned text container">
+            <div class="ui huge header" id="start">Abilities</div>
+        </div>
+
+        <div class="ui borderless inverted main menu" style="">
+            <a href="/"><img class="ui small left floated image" src=@(routes.Assets.at("images/logo.png"))></a>
+            <div class="ui text container">
+                <a href="/index" class="item">Pokémon</a>
+                <a href="/search" class="item">Search</a>
+                <a href="/trainers" class="item">Trainers</a>
+                <span class="active item">Abilities</span>
+            </div>
+        </div>
+
+        <div class="ui right internal rail">
+            <div class="ui sticky" style="position:fixed;top:400px;right:100px">
+                <button class="ui large icon button" onclick="window.location.hash = '#start';">
+                    Top
+                </button>
+            </div>
+        </div>
+
+
+
+
+        <div class="ui segment">
+            <table class="ui celled padded inverted grey selectable table">
+                        <tr>
+                            <th>Ability</th>
+                            <th>Description</th>
+                        </tr>
+                        @for(k<-A.keys){
+                            <tr @if(k.toLowerCase.equals(s.toLowerCase)) {class="active"} else{class=""}>
+                                <td id="@{k.toLowerCase}">@k</td>
+                                <td>@A(k)</td>
+                            </tr>
+                        }
+            </table>
+        </div>
+
+        <div class="ui bottom inverted vertical footer segment">
+            <div class="ui container">
+                <div class="ui inverted header">
+                    Site Master: David<br>
+                    Contact : 9964132847<br>
+                    Email: davidsemailid@@gmail.com
+                </div>
+            </div>
+        </div>
+    </body>
 </html>

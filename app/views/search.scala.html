@@ -1,0 +1,131 @@
+@import models.FormStuff._
+@import helper._
+@(pokeForm: Form[poke])(implicit messages: Messages)
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" type="text/css" href=@(routes.Assets.at("stylesheets/semantic.css"))>
+        <title>Search</title>
+    </head>
+    <body>
+
+        <div class="ui borderless inverted main menu fixed">
+            <a href="/"><img class="ui small left floated image" src=@(routes.Assets.at("images/logo.png"))></a>
+            <div class="ui text container">
+                <a href="/index" class="item">Pokémon</a>
+                <span class="active item">Search</span>
+                <a href="/trainers" class="item">Trainers</a>
+                <a href="/abilities" class="item">Abilities</a>
+            </div>
+        </div>
+
+
+        <div class="main ui center aligned text container">
+            <br><br>
+            <div class="ui huge header">Search for a Pokémon</div>
+        </div>
+
+
+
+        <div class="ui container">
+            <div class="ui inverted segment">
+                @form(action = routes.Application.findres2,'class->"ui inverted form"){
+                @input(pokeForm("")) { (id, name, value, args) =>
+                <label class="ui big green pointing below label">Name like</label>
+                <input type="text" name="n" id="n" value="" placeholder="Name" @toHtmlArgs(args)>
+                }
+                <div class="ui form">
+                    <div class="field">
+                        @input(pokeForm("")) { (id, name, value, args) =>
+                            <label class="ui big blue pointing below label">Of Type</label>
+                            <select name="t1" class="ui search dropdown" id="t1" value="" placeholder="Type 1" @toHtmlArgs(args)>
+                                <option value="">Any</option>
+                                <option value="FIRE">Fire</option>
+                                <option value="WATER">Water</option>
+                                <option value="GRASS">Grass</option>
+                                <option value="NORMAL">Normal</option>
+                                <option value="GHOST">Ghost</option>
+                                <option value="BUG">Bug</option>
+                                <option value="FIGHTING">Fighting</option>
+                                <option value="PSYCHIC">Psychic</option>
+                                <option value="ROCK">Rock</option>
+                                <option value="GROUND">Ground</option>
+                                <option value="STEEL">Steel</option>
+                                <option value="DARK">Dark</option>
+                                <option value="DRAGON">Dragon</option>
+                                <option value="ELECTRIC">Electric</option>
+                                <option value="FLYING">Flying</option>
+                                <option value="ICE">Ice</option>
+                                <option value="POISON">Poison</option>
+                            </select>
+                        }
+                    </div>
+                    <div class="field">
+                        @input(pokeForm("")) { (id, name, value, args) =>
+                            <label class="ui big olive pointing below label">And second Type</label>
+                            <select name="t2" class="ui search dropdown" id="t2" value="" placeholder="Type 2" @toHtmlArgs(args)>
+                                <option value="">Any</option>
+                                <option value="FIRE">Fire</option>
+                                <option value="WATER">Water</option>
+                                <option value="GRASS">Grass</option>
+                                <option value="NORMAL">Normal</option>
+                                <option value="GHOST">Ghost</option>
+                                <option value="BUG">Bug</option>
+                                <option value="FIGHTING">Fighting</option>
+                                <option value="PSYCHIC">Psychic</option>
+                                <option value="ROCK">Rock</option>
+                                <option value="GROUND">Ground</option>
+                                <option value="STEEL">Steel</option>
+                                <option value="DARK">Dark</option>
+                                <option value="DRAGON">Dragon</option>
+                                <option value="ELECTRIC">Electric</option>
+                                <option value="FLYING">Flying</option>
+                                <option value="ICE">Ice</option>
+                                <option value="POISON">Poison</option>
+                            </select>
+                        }
+                    </div>
+                </div>
+
+                @input(pokeForm("")) { (id, name, value, args) =>
+                    <label class="ui big purple pointing below label">With Ability</label>
+                    <input type="text" name="ab" id="ab" value="" placeholder="Any" @toHtmlArgs(args)>
+                }
+
+                <button class="ui button" type="submit">GO</button>
+                }
+            </div>
+        </div>
+
+        <div class="ui hidden divider"></div>
+        <div class="ui hidden divider"></div>
+        <div class="ui hidden divider"></div>
+        <div class="ui hidden divider"></div>
+        <div class="ui hidden divider"></div>
+        <div class="ui hidden divider"></div>
+        <div class="ui hidden divider"></div>
+        <div class="ui hidden divider"></div>
+        <div class="ui hidden divider"></div>
+        <div class="ui hidden divider"></div>
+        <div class="ui hidden divider"></div>
+        <div class="ui hidden divider"></div>
+        <div class="ui hidden divider"></div>
+        <div class="ui hidden divider"></div>
+        <div class="ui hidden divider"></div>
+        <div class="ui hidden divider"></div>
+        <div class="ui hidden divider"></div>
+        <div class="ui hidden divider"></div>
+        <div class="ui hidden divider"></div>
+        <div class="ui hidden divider"></div>
+
+        <div class="ui inverted vertical footer segment">
+            <div class="ui container">
+                <div class="ui inverted header">
+                    Site Master: David<br>
+                    Contact : 9964132847<br>
+                    Email: davidsemailid@@gmail.com
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

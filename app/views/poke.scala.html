@@ -1,0 +1,96 @@
+@import models.Poke
+@import scala.collection.immutable.ListSet
+@(p:Poke,prev:Poke,next:ListSet[Poke],strength:ListSet[String],weakness:ListSet[String])
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href=@(routes.Assets.at("stylesheets/semantic.css"))>
+    <title>@{p.name}</title>
+</head>
+<body>
+    <div class="ui borderless inverted main menu">
+        <a href="/"><img class="ui small left floated image" src=@(routes.Assets.at("images/logo.png"))></a>
+        <div class="ui text container">
+            <a href="/index" class="item">Pokémon</a>
+            <a href="/search" class="item">Search</a>
+            <a href="/trainers" class="item">Trainers</a>
+            <a href="/abilities" class="item">Abilities</a>
+            <span class="active item">@{p.name}</span>
+        </div>
+    </div>
+
+    <div class="ui vertical masthead segment">
+        <div class="ui centered card">
+            <div class="image">
+                <img src=@(routes.Assets.at(s"images/stat/${p.id}.png"))>
+            </div>
+
+            <div class="content">
+                <span class="header">Name:    @{p.name}</span><br>
+                <span class="header">Type:    @{p.type1}@if(p.type2!=null) {/@{p.type2}}</span><br>
+                <a class="header" href="/abilities/@{p.ability}">Ability: @{p.ability}</a>
+                <div class="meta">
+                    <div class="description">
+                        ID:@{p.id}
+                    </div>
+                    <div class="left floated description">
+                        Weakness:
+
+                            @for(w<-weakness){
+                            <p>@w</p>
+                            }
+                    </div>
+                    <div class="right floated description">
+                        Strengths:
+
+                            @for(s<-strength){
+                            <p>@s</p>
+                            }
+                    </div>
+                </div>
+            </div>
+            <div class="center aligned extra">
+                <div class="meta">
+                    <div class="grid">
+                        <div class="row">
+                            <div class="column">Previous evolution</div>
+                            @if(prev.id!=0){
+                                <div class="column"><a href = "/index/@{prev.id}">
+                                    <img class="centered image" src =@(routes.Assets.at(s"images/animated/${prev.id}.gif"))></a>
+                                </div>
+                            }
+
+                        </div>
+                        <div class="ui divider"></div>
+                        <div class="row">
+                            <div class="column">Current evolution</div>
+                            <div class="columm"><img class="centered image" src = @(routes.Assets.at(s"images/animated/${p.id}.gif"))></div>
+                        </div>
+                        <div class="ui divider"></div>
+                        <div class="row">
+                            <div class="column">Next evolution</div>
+                            @for(pk<-next){
+                                @if(pk.id!=0){
+                                    <div class="column">
+                                        <a href = "/index/@{pk.id}"><img class="" src =@(routes.Assets.at(s"images/animated/${pk.id}.gif"))></a>
+                                    </div>
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="ui bottom inverted vertical footer segment">
+        <div class="ui container">
+            <div class="ui inverted header">
+                Site Master: David<br>
+                Contact : 9964132847<br>
+                Email: davidsemailid@@gmail.com
+            </div>
+        </div>
+    </div>
+</body>
+</html>

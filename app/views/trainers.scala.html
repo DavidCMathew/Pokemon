@@ -1,19 +1,61 @@
 @import scala.collection.immutable.ListSet
-@(A:Map[String,ListSet[String]])
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Trainers</title>
-</head>
-<body>
-    <ul>
-        @for(k<-A.keys){
-            <li>@k- @for(s<-A(k)){
-                    <b> @s </b>
-                }
+@import models.Poke
 
-            </li>
-        }
-    </ul>
-</body>
+@(A:Map[String,ListSet[Poke]])
+
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" type="text/css" href=@(routes.Assets.at("stylesheets/semantic.css"))>
+        <title>Trainers</title>
+    </head>
+
+    <body>
+        <div class="main ui center aligned text container">
+            <br><br>
+            <div class="ui huge header">Trainers</div>
+        </div>
+
+        <div class="ui borderless inverted main menu fixed">
+            <a href="/"><img class="ui small left floated image" src=@(routes.Assets.at("images/logo.png"))></a>
+            <div class="ui text container">
+                <a href="/index" class="item">Pokémon</a>
+                <a href="/search" class="item">Search</a>
+                <span class="active item">Trainers</span>
+                <a href="/abilities" class="item">Abilities</a>
+            </div>
+        </div>
+
+        <div class="ui container">
+            <table class="ui padded borderless selectable table" style="borders:0px 0px 0px 0px;">
+                <tr class="center aligned">
+                    <th>Name</th>
+                    <th>Pokemon</th>
+                </tr>
+
+                @for(k<-A.keys){
+                    <tr class="center aligned">
+                        <td>
+                            @k
+                        </td>
+                        @for(p<-A(k)){
+                            <td class="selectable">
+                                <a href=/index/@{p.id}><img src=@(routes.Assets.at(s"images/animated/${p.id}.gif")) class="centered image"><br>
+                                @{p.name}</a>
+                            </td>
+                        }
+                    </tr>
+                }
+            </table>
+        </div>
+        <div class="ui inverted vertical footer segment">
+            <div class="ui container">
+                <div class="ui inverted header">
+                    Site Master: David<br>
+                    Contact : 9964132847<br>
+                    Email: davidsemailid@@gmail.com
+                </div>
+            </div>
+        </div>
+    </body>
 </html>

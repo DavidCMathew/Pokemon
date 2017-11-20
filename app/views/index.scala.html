@@ -3,20 +3,65 @@
 @(poke:ListSet[Poke])
 <html>
     <head>
-        <title>Pokemon</title>
+        <link rel="stylesheet" type="text/css" href=@(routes.Assets.at("stylesheets/semantic.css"))>
+        <title>Pokémon</title>
     </head>
+
     <body>
-        <ul>
-            @for(p<-poke){
-            <li>
-                <b>@{p.id}</b>
-                <b>@{p.name}</b>
-                <b>@{p.type1}</b>
-                <b>@{p.type2}</b>
-                <b>@{p.ability}</b>
-                <b>@{if(p.evolvesFrom!=0) p.evolvesFrom else "-"}</b>
-            </li>
-            }
-        </ul>
+        <div class="main ui center aligned text container">
+            <br><br>
+            <div class="ui huge header" id="start">Pokémon</div>
+        </div>
+
+        <div class="ui right internal rail">
+            <div class="ui sticky" style="position:fixed;top:400px;right:100px">
+                <button class="ui large icon red button" onclick="window.location.hash = '#start';">
+                    Top
+                </button>
+            </div>
+        </div>
+
+
+        <div class="ui borderless inverted main menu fixed">
+            <a href="/"><img class="ui small left floated image" src=@(routes.Assets.at("images/logo.png"))></a>
+            <div class="ui text container">
+                <span class="active item">Pokémon</span>
+                <a href="/search" class="item">Search</a>
+                <a href="/trainers" class="item">Trainers</a>
+                <a href="/abilities" class="item">Abilities</a>
+            </div>
+        </div>
+
+        <div class="ui text container">
+            <table class="ui celled padded selectable inverted table">
+                <tr class = "center aligned">
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th colspan="2">Type</th>
+                    <th>Ability</th>
+                    <th>Image</th>
+                </tr>
+                @for(p<-poke){
+                    <tr class="positive" onclick="document.location='/index/@{p.id}'">
+                        <td>@{p.id}</td>
+                        <td class="selectable"><a href="/index/@{p.id}">@{p.name}</a></td>
+                        <td>@{p.type1}</td>
+                        <td>@{p.type2}</td>
+                        <td class="selectable"><a href="/abilities/@{p.ability}">@{p.ability}</a></td>
+                        <td class="selectable"><a href="/index/@{p.id}"><img src=@(routes.Assets.at(s"images/animated/${p.id}.gif")) /></a></td>
+                    </tr>
+                }
+            </table>
+        </div>
+
+        <div class="ui inverted vertical footer segment" @if(poke.isEmpty) {style="position:fixed;bottom:0px;width:100%;"}>
+            <div class="ui container">
+                <div class="ui inverted header">
+                    Site Master: David<br>
+                    Contact : 9964132847<br>
+                    Email: davidsemailid@@gmail.com
+                </div>
+            </div>
+        </div>
     </body>
 </html>

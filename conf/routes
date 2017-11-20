@@ -6,5 +6,9 @@
 GET     /                           controllers.Application.home
 GET     /trainers                   controllers.Application.viewTrainers
 GET     /abilities                  controllers.Application.viewAbilities
-GET     /add                        controllers.Application.addTrainer
 GET     /index                      controllers.Application.viewPokemon
+GET     /index/:id                  controllers.Application.singlePokemon(id:Int)
+POST    /Result                     controllers.Application.findres2
+GET     /search                     controllers.Application.findPoke
+GET     /assets/*file               controllers.Assets.at(path="/public", file)
+GET     /abilities/:a               controllers.Application.singleabi(a:String)
