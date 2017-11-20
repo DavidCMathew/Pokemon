@@ -9,10 +9,6 @@
 
     <body onload="window.location.hash = '#@{s.toLowerCase}';">
 
-        <div class="main ui center aligned text container">
-            <div class="ui huge header" id="start">Abilities</div>
-        </div>
-
         <div class="ui borderless inverted main menu" style="">
             <a href="/"><img class="ui small left floated image" src=@(routes.Assets.at("images/logo.png"))></a>
             <div class="ui text container">
@@ -20,7 +16,12 @@
                 <a href="/search" class="item">Search</a>
                 <a href="/trainers" class="item">Trainers</a>
                 <span class="active item">Abilities</span>
+                <a href="/add" class="item">Add a Pokémon</a>
             </div>
+        </div>
+
+        <div class="main ui center aligned text container">
+            <div class="ui huge header" id="start">Abilities</div>
         </div>
 
         <div class="ui right internal rail">

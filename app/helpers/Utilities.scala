@@ -13,13 +13,20 @@ object Utilities {
   private val password = "dave"
   DriverManager.registerDriver(new Driver)
   private val connection = DriverManager.getConnection(url, username, password)
+
   def sendquery(query:String):ResultSet= {
     val res=connection createStatement() executeQuery (query)
     res
   }
 
+  def sendUpdate(query:String):Int={
+    connection createStatement() executeUpdate(query)
+  }
+
   def trainersPokemon(trainer:String):ListSet[Poke]={
-    val res=sendquery(s"SELECT P.NAME,P.ID,P.TYPE1,P.TYPE2,P.ABILITY,P.EVOLVES_FROM FROM TEAM T,TRAINER TR,POKEMON P WHERE TR.ID=T.TRAINER AND P.ID=T.POKEMON AND TR.NAME='$trainer';")
+    val res=sendquery(s"SELECT P.NAME,P.ID,P.TYPE1,P.TYPE2,P.ABILITY,P.EVOLVES_FROM " +
+                      s"FROM TEAM T,TRAINER TR,POKEMON P " +
+                      s"WHERE TR.ID=T.TRAINER AND P.ID=T.POKEMON AND TR.NAME='$trainer';")
     var pokes:ListSet[Poke]=new ListSet[Poke]
     while(res.next())
       pokes=pokes+new Poke(res.getString("NAME"),res.getInt("ID"),res.getString("TYPE1")

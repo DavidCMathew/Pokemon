@@ -12,3 +12,5 @@ POST    /Result                     controllers.Application.findres2
 GET     /search                     controllers.Application.findPoke
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
 GET     /abilities/:a               controllers.Application.singleabi(a:String)
+GET     /add                        controllers.Application.addPoke
+POST    /added                      controllers.Application.addPokeHandler

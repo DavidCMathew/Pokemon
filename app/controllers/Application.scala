@@ -96,4 +96,37 @@ class Application extends Controller {
       X=X.+(a->getAbilities(a))
     Ok(views.html.abilities(X,s))
   }
+
+  def addPoke()=Action {implicit request=>
+    Ok(views.html.addPoke(fullpokeForm))
+  }
+
+  def addPokeHandler()=Action{implicit request=>
+    val errorFunction = { formWithErrors: Form[pokefull] =>
+
+      BadRequest(views.html.addPoke(formWithErrors))
+    }
+
+    val successFunction = { data: pokefull =>
+
+      val name:String = data.n.trim.toUpperCase
+      val id:Int = data.id
+      val ability:String = data.ab.trim.toUpperCase
+      val type1:String = data.t1.trim.toUpperCase
+      val type2:String = if(data.t2.isEmpty) "NULL" else s"'${data.t2.trim.toUpperCase}'"
+      val evolves = if(data.ef==0) "NULL" else data.ef
+      println(id+ability)
+      try {
+        sendUpdate(s"INSERT INTO POKEMON VALUES ($id,'$name','$type1',$type2,'$ability',$evolves);")
+        val res = findPokemon(new Poke("", id, "", "", "", 0))
+        Ok(views.html.index(res))
+      }catch {
+        case e=>e.printStackTrace()
+          Redirect(routes.Application.addPoke())
+      }
+    }
+
+    val formValidationResult = fullpokeForm.bindFromRequest
+    formValidationResult.fold(errorFunction, successFunction)
+  }
 }

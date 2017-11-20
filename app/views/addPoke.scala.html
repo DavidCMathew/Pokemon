@@ -1,10 +1,68 @@
-<!DOCTYPE html>
+@import models.FormStuff._
+@import helper._
+@(pokeForm: Form[pokefull])(implicit messages: Messages)
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Add</title>
-</head>
-<body>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" type="text/css" href=@(routes.Assets.at("stylesheets/semantic.css"))>
+        <title>Add</title>
+    </head>
+    <body>
 
-</body>
+        <div class="ui borderless inverted main menu fixed">
+            <a href="/"><img class="ui small left floated image" src=@(routes.Assets.at("images/logo.png"))></a>
+            <div class="ui text container">
+                <a href="/index" class="item">Pokémon</a>
+                <a href="/search" class="item">Search</a>
+                <a href="/trainers" class="item">Trainers</a>
+                <a href="/abilities" class="item">Abilities</a>
+                <span class="active item">Add a Pokémon</span>
+            </div>
+        </div>
+
+
+        <div class="main ui center aligned text container">
+            <br><br>
+            <div class="ui huge header">Add a Pokémon</div>
+        </div>
+
+        <div class="ui container">
+            <div class="ui inverted segment">
+                <div class="ui form">
+                    @form(action = routes.Application.addPokeHandler,'class->"ui inverted form"){
+                        @input(fullpokeForm("")) { (id, name, value, args) =>
+                            <label class="ui big green pointing below label">Name</label>
+                            <input type="text" name="n" id="n" value="" placeholder="Name" @toHtmlArgs(args)>
+                        }
+
+                        @input(fullpokeForm("")) { (id, name, value, args) =>
+                            <label class="ui big blue pointing below label">ID</label>
+                            <input type="number" name="id" id="id" value="" placeholder="ID" @toHtmlArgs(args)>
+                        }
+
+                        @input(fullpokeForm("")) { (id, name, value, args) =>
+                            <label class="ui big teal pointing below label">Ability</label>
+                            <input type="text" name="ab" id="ab" value="" placeholder="Ability" @toHtmlArgs(args)>
+                        }
+
+                        @input(fullpokeForm("")) { (id, name, value, args) =>
+                            <label class="ui big red pointing below label">Type 1</label>
+                            <input type="text" name="t1" id="t1" value="" placeholder="Type 1" @toHtmlArgs(args)>
+                        }
+
+                        @input(fullpokeForm("")) { (id, name, value, args) =>
+                            <label class="ui big orange pointing below label">Type 2</label>
+                            <input type="text" name="t2" id="t2" value=" " placeholder="Type 2" @toHtmlArgs(args)>
+                        }
+
+                        @input(fullpokeForm("")) { (id, name, value, args) =>
+                            <label class="ui big purple pointing below label">Evolves From</label>
+                            <input type="number" name="ef" id="ef" value=" " placeholder="Evolves From" @toHtmlArgs(args)>
+                        }
+                        <button class="ui button">GO</button>
+                    }
+                </div>
+            </div>
+        </div>
+    </body>
 </html>
