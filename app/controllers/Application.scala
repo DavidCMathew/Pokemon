@@ -1,6 +1,5 @@
 package controllers
 
-
 import play.api.mvc._
 import helpers.Utilities._
 import models.Poke
@@ -12,8 +11,6 @@ import play.api.i18n.Messages.Implicits._
 import scala.collection.immutable.ListSet
 
 class Application extends Controller {
-
-
 
   def home = Action {
     Ok(views.html.home())
@@ -115,7 +112,6 @@ class Application extends Controller {
       val type1:String = data.t1.trim.toUpperCase
       val type2:String = if(data.t2.isEmpty) "NULL" else s"'${data.t2.trim.toUpperCase}'"
       val evolves = if(data.ef==0) "NULL" else data.ef
-      println(id+ability)
       try {
         sendUpdate(s"INSERT INTO POKEMON VALUES ($id,'$name','$type1',$type2,'$ability',$evolves);")
         val res = findPokemon(new Poke("", id, "", "", "", 0))

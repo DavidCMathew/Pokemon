@@ -14,10 +14,13 @@ object Utilities {
   DriverManager.registerDriver(new Driver)
   private val connection = DriverManager.getConnection(url, username, password)
 
+
   def sendquery(query:String):ResultSet= {
     val res=connection createStatement() executeQuery (query)
     res
   }
+
+
 
   def sendUpdate(query:String):Int={
     connection createStatement() executeUpdate(query)
@@ -49,8 +52,9 @@ object Utilities {
 
     val typeclause=if(p.type1.isEmpty&&p.type2.isEmpty)""
                   else if(p.type1.nonEmpty&&(p.type2.nonEmpty))
-                                s"(TYPE1='${p.type1}' AND TYPE2='${p.type2}') OR (TYPE1='${p.type2}' AND TYPE2='${p.type1}') AND "
-                  else s"(TYPE1='${p.type1}' OR TYPE2='${p.type1}') AND "
+                                s"((TYPE1='${p.type1}' AND TYPE2='${p.type2}') OR (TYPE1='${p.type2}' AND TYPE2='${p.type1}')) AND "
+                  else if(p.type1.nonEmpty) s"(TYPE1='${p.type1}' OR TYPE2='${p.type1}') AND "
+                  else s"(TYPE1='${p.type2}' OR TYPE2='${p.type2}') AND "
 
     val abilityclause = if(!p.ability.isEmpty) s"(ABILITY='${p.ability}') AND " else ""
 
