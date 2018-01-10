@@ -17,6 +17,7 @@ object Utilities {
 
   def sendquery(query:String):ResultSet= {
     val res=connection createStatement() executeQuery (query)
+    println (query)
     res
   }
 
@@ -37,11 +38,6 @@ object Utilities {
     pokes
   }
 
-  def getAbilities(name:String):String={
-    val res=sendquery(s"SELECT INFO FROM ABILITIES WHERE NAME='$name';")
-    res.next()
-    res getString("INFO")
-  }
 
   def findPokemon(p:Poke):ListSet[Poke]={
     val sel:String="SELECT * FROM POKEMON WHERE "
@@ -51,9 +47,14 @@ object Utilities {
     val idclause = if (p.id!=0) s"(ID='${p.id}') AND " else ""
 
     val typeclause=if(p.type1.isEmpty&&p.type2.isEmpty)""
+                  else if(p.type1.nonEmpty&&p.type2.equals("NONE")) s"(TYPE1='${p.type1}' AND TYPE2 IS NULL) AND "
+                  else if(p.type1.nonEmpty&&p.type2.equals("ALL")) s"((TYPE1='${p.type1}' OR TYPE2='${p.type1}') AND TYPE2 IS NOT NULL) AND "
+                  else if(p.type1.isEmpty&&p.type2.equals("NONE")) s"(TYPE2 IS NULL) AND "
+                  else if(p.type1.isEmpty&&p.type2.equals("ALL")) s"(TYPE2 IS NOT NULL) AND "
                   else if(p.type1.nonEmpty&&(p.type2.nonEmpty))
                                 s"((TYPE1='${p.type1}' AND TYPE2='${p.type2}') OR (TYPE1='${p.type2}' AND TYPE2='${p.type1}')) AND "
                   else if(p.type1.nonEmpty) s"(TYPE1='${p.type1}' OR TYPE2='${p.type1}') AND "
+
                   else s"(TYPE1='${p.type2}' OR TYPE2='${p.type2}') AND "
 
     val abilityclause = if(!p.ability.isEmpty) s"(ABILITY='${p.ability}') AND " else ""

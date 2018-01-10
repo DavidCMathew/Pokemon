@@ -65,7 +65,7 @@
                         </div>
                         <div class="field">
                             @input(pokeForm("")) { (id, name, value, args) =>
-                                <label class="ui big olive pointing below label">And second Type</label>
+                                <label class="ui big olive pointing below label">And Second Type</label>
                                 <select name="t2" class="ui search dropdown" id="t2" value="" placeholder="Type 2" @toHtmlArgs(args)>
                                     <option value="">Any</option>
                                     <option value="FIRE">Fire</option>
@@ -85,6 +85,8 @@
                                     <option value="FLYING">Flying</option>
                                     <option value="ICE">Ice</option>
                                     <option value="POISON">Poison</option>
+                                    <option value="None">None</option>
+                                    <option values="All">All</option>
                                 </select>
                             }
                         </div>

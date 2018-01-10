@@ -30,15 +30,11 @@ class Application extends Controller {
   }
 
   def viewAbilities = Action{
-    val res=sendquery("SELECT NAME FROM ABILITIES")
-    var abilityNames:ListSet[String]=new ListSet[String]
-
-    while (res.next())
-      abilityNames=abilityNames+res.getString("NAME")
 
     var X:Map[String,String]=Map[String,String]()
-    for(a<-abilityNames)
-      X=X.+(a->getAbilities(a))
+    val res = sendquery("SELECT * FROM ABILITIES")
+    while (res.next)
+      X=X.+(res.getString("NAME")->res.getString("INFO"))
     Ok(views.html.abilities(X))
   }
 
@@ -82,15 +78,10 @@ class Application extends Controller {
   }
 
   def singleabi(s:String) = Action{
-    val res=sendquery("SELECT NAME FROM ABILITIES")
-    var abilityNames:ListSet[String]=new ListSet[String]
-
-    while (res.next())
-      abilityNames=abilityNames+res.getString("NAME")
-
     var X:Map[String,String]=Map[String,String]()
-    for(a<-abilityNames)
-      X=X.+(a->getAbilities(a))
+    val res = sendquery("SELECT * FROM ABILITIES")
+    while (res.next)
+      X=X.+(res.getString("NAME")->res.getString("INFO"))
     Ok(views.html.abilities(X,s))
   }
 
@@ -101,7 +92,7 @@ class Application extends Controller {
   def addPokeHandler()=Action{implicit request=>
     val errorFunction = { formWithErrors: Form[pokefull] =>
 
-      BadRequest(views.html.addPoke(formWithErrors))
+      Ok(views.html.addPoke(formWithErrors,true))
     }
 
     val successFunction = { data: pokefull =>
@@ -118,7 +109,7 @@ class Application extends Controller {
         Ok(views.html.index(res))
       }catch {
         case e=>e.printStackTrace()
-          Redirect(routes.Application.addPoke())
+          Ok(views.html.addPoke(fullpokeForm,true))
       }
     }
 

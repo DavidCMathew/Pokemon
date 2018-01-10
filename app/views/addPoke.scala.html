@@ -1,6 +1,6 @@
 @import models.FormStuff._
 @import helper._
-@(pokeForm: Form[pokefull])(implicit messages: Messages)
+@(pokeForm: Form[pokefull],error:Boolean=false)(implicit messages: Messages)
 <html lang="en">
     <head>
         <meta charset="UTF-8">
@@ -60,7 +60,7 @@
                             <input type="number" name="ef" id="ef" value="0" placeholder="Evolves from" @toHtmlArgs(args)>
                         }
                         <button class="ui button">GO</button>
-
+                    @if(error){<label class="ui big red label">Error has occured, check all values</label>}
                     }
                 </div>
             </div>
